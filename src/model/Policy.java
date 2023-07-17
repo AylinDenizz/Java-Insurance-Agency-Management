@@ -18,6 +18,9 @@ public class Policy {
         this.endDate = endDate;
     }
 
+    public Policy() {
+    }
+
     public InsuranceCompany getInsuranceCompany() {
         return insuranceCompany;
     }

@@ -13,6 +13,9 @@ public class Insurance {
         return insuranceTypeEnum;
     }
 
+    public Insurance() {
+    }
+
     public void setInsuranceTypeEnum(InsuranceTypeEnum insuranceTypeEnum) {
         this.insuranceTypeEnum = insuranceTypeEnum;
     }

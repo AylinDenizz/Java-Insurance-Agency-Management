@@ -12,6 +12,9 @@ public class InsuranceRequest {
         this.policy = policy;
     }
 
+    public InsuranceRequest() {
+    }
+
     public ArrayList<Proposal> getProposalList() {
         return proposalList;
     }

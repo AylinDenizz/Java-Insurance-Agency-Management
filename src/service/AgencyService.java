@@ -1,8 +1,6 @@
 package service;
 
-import model.Agency;
-import model.BankAccount;
-import model.InsuranceCompany;
+import model.*;
 
 import java.util.ArrayList;
 
@@ -33,9 +31,26 @@ public class AgencyService {
             insuranceCompanyList.add(insuranceCompany);
             agency.setInsuranceCompanyList(insuranceCompanyList);
         }
-
-
-
     }
+    public void addPaymentMovementToAgency(Agency agency, PaymentMovement paymentMovement){
+        if(agency.getPaymentMovementList()!=null) {
+            agency.getPaymentMovementList().add(paymentMovement);
+        }else {
+            ArrayList<PaymentMovement> paymentMovementList = new ArrayList<>();
+            paymentMovementList.add(paymentMovement);
+            agency.setPaymentMovementList(paymentMovementList);
+        }
+    }
+
+    public void addCustomerToAgency(Agency agency, Customer customer){
+        if(agency.getCustomerList()!=null) {
+            agency.getCustomerList().add(customer);
+        }else {
+            ArrayList<Customer> customerList = new ArrayList<>();
+            customerList.add(customer);
+            agency.setCustomerList(customerList);
+        }
+    }
+
 
 }

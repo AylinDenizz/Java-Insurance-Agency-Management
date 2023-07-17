@@ -6,7 +6,7 @@ public class PaymentMovement {
 
     private BankAccount bankAccount;
     private String description;
-    private MovementType movementType;
+    private MovementTypeEnum movementType;
     private BigDecimal amount;
 
 
@@ -26,11 +26,11 @@ public class PaymentMovement {
         this.description = description;
     }
 
-    public MovementType getMovementType() {
+    public MovementTypeEnum getMovementType() {
         return movementType;
     }
 
-    public void setMovementType(MovementType movementType) {
+    public void setMovementType(MovementTypeEnum movementType) {
         this.movementType = movementType;
     }
 
