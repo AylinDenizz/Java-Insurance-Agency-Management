@@ -61,19 +61,16 @@ public class CustomerService {
 
     public void acceptProposal(Customer customer, Proposal proposal, InsuranceRequest insuranceRequest) {
         List<InsuranceRequest> insuranceRequestList = customer.getInsuranceRequestList();
-        for (InsuranceRequest insuranceRequests : insuranceRequestList) {
-            if (insuranceRequests.equals(insuranceRequest)) {
-                for (Proposal proposal1 : insuranceRequests.getProposalList()) {
-                    if (proposal1.equals(proposal) && checkBankAccount(customer,proposalService.calculateDiscountedPrice(proposal1))) {
-                        BankAccount customerBankAccount = returnAppropriateBankAccount(customer,
-                                proposalService.calculateDiscountedPrice(proposal));
-                        if (customerBankAccount != null) {
-                            customerBankAccount.setAmount(customerBankAccount.getAmount().subtract(
-                                    proposalService.calculateDiscountedPrice(proposal)));
-                            proposal.setApproved(true);
-                        } else {
-                            proposal.setApproved(false);
+        for (InsuranceRequest insuranceRequest1: insuranceRequestList) {
+            if (insuranceRequest1.equals(insuranceRequest)){
+                for (Proposal proposal1 : insuranceRequest1.getProposalList()) {
+                    if (proposal1.equals(proposal)) {
+                        BankAccount bankAccount = checkBankAccount(customer, proposalService.calculateDiscountedPrice(proposal));
+                        if (bankAccount != null) {
+                            bankAccount.setAmount(bankAccount.getAmount().subtract(proposalService.calculateDiscountedPrice(proposal)));
+
                         }
+                        proposal1.setApproved(true);
                     }
                 }
             }
@@ -81,34 +78,17 @@ public class CustomerService {
     }
 
 
-    public boolean checkBankAccount(Customer customer, BigDecimal amount) {
-        boolean returnItem = false;
+    public BankAccount checkBankAccount(Customer customer, BigDecimal amount) {
         List<BankAccount> bankAccountList = customer.getBankAccountList();
         for (BankAccount bankAccount : bankAccountList) {
-
             if (bankAccount.getAmount().compareTo(amount) >= 0) {
-                 returnItem = true;
-                break;
-            }
-            else {
-                 returnItem = true;
+                return bankAccount;
             }
         }
-        return returnItem;
+        return null;
     }
 
-    public BankAccount returnAppropriateBankAccount(Customer customer, BigDecimal amount) {
-        BankAccount appropriateBankAccount = new BankAccount();
 
-        List<BankAccount> bankAccountList = customer.getBankAccountList();
-        for (BankAccount bankAccount : bankAccountList) {
-
-            if (bankAccount.getAmount().compareTo(amount) >= 0) {
-                appropriateBankAccount = bankAccount;
-            }
-        }
-        return appropriateBankAccount;
-    }
 
 
 

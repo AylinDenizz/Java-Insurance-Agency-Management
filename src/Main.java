@@ -28,7 +28,7 @@ public class Main {
         BankAccount allianzBankAccount = bankAccountService.createBankAccount("Yapı Kredi", "TR55000003714862",
                 new BigDecimal(1000000000));
         BankAccount CustomerBankAccount1 = bankAccountService.createBankAccount("İş Bankası", "TR55000003849222",
-                new BigDecimal(13000));
+                new BigDecimal(130000));
 
 
         // insuranceses are created.
@@ -58,8 +58,6 @@ public class Main {
         agencyService.addCustomerToAgency(agency, customer1);
         agencyService.addInsuranceCompanyToAgency(agency, insuranceCompany);
 
-
-
         //insurance request object is created and added to customer object.
         InsuranceRequestService insuranceRequestService = new InsuranceRequestService();
         InsuranceRequest insuranceRequest = insuranceRequestService.createInsuranceRequest(vehicle1);
@@ -71,8 +69,7 @@ public class Main {
         LocalDate expireDate = startDate.plusDays(3);
 
         ProposalService proposalService = new ProposalService();
-        Proposal proposal1 = proposalService.createProposal(insuranceCompany, vehicle1, new BigDecimal(1000),
-                startDate, endDate, expireDate, new BigDecimal(100));
+        Proposal proposal1 = proposalService.createProposal(insuranceCompany, vehicle1, new BigDecimal(1000), startDate, endDate, expireDate, new BigDecimal(100));
 
         //  Proposal added to insurance request and added to customer object.
         insuranceRequestService.addProposalListToInsuranceRequest(insuranceRequest, proposal1);
@@ -111,6 +108,7 @@ public class Main {
         // Commision calculation and transfer to agency movement performed.
         BigDecimal commissionAmount = discountedPrice.multiply(proposal1.getCompany().getCommission()).divide(
                 new BigDecimal(100));
+
         proposalCompanyBankAccount.setAmount(proposalCompanyBankAccount.getAmount().subtract(commissionAmount));
         PaymentMovement commisionTransferFromCompanyToAgency = paymentMovementService.createPaymentMovementService(
                 proposalCompanyBankAccount, "commision transfer",MovementTypeEnum.OUTCOME,commissionAmount);
@@ -123,5 +121,8 @@ public class Main {
             agencyService.addPaymentMovementToAgency(agency,commisionIncomeCompanyToAgency);
 
         }
+        System.out.println(customer1);
+        System.out.println(agency);
+        System.out.println(insuranceCompany);
     }
 }

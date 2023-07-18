@@ -19,6 +19,8 @@ public class ProposalService {
         proposal.setExpireDate(expireDate);
         proposal.setStartDate(startDate);
         proposal.setVehicle(vehicle);
+        proposal.setDiscountPrice(discountPrice);
+        proposal.setOfferPrice(offerPrice);
         return proposal;
 
     }
