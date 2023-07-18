@@ -65,7 +65,7 @@ public class Proposal {
         this.expireDate = expireDate;
     }
 
-    public boolean isApproved() {
+    public boolean getApproved() {
         return isApproved;
     }
 

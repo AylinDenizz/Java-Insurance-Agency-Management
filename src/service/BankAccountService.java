@@ -2,6 +2,7 @@ package service;
 
 import model.Accident;
 import model.BankAccount;
+import model.Customer;
 
 import java.math.BigDecimal;
 import java.util.Date;

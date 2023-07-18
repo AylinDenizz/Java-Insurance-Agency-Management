@@ -71,6 +71,8 @@ public class CustomerService {
                             customerBankAccount.setAmount(customerBankAccount.getAmount().subtract(
                                     proposalService.calculateDiscountedPrice(proposal)));
                             proposal.setApproved(true);
+                        } else {
+                            proposal.setApproved(false);
                         }
                     }
                 }

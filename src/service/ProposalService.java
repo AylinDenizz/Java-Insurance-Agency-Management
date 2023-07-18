@@ -30,4 +30,5 @@ public class ProposalService {
             return  proposal.getOfferPrice();
         }
     }
+
 }
