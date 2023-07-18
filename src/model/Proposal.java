@@ -1,15 +1,16 @@
 package model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Proposal {
     private InsuranceCompany company;
     private Vehicle vehicle;
     private BigDecimal offerPrice;
-    private Date startDate;
-    private Date endDate;
-    private Date expireDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private LocalDate expireDate;
     private boolean isApproved;
     private BigDecimal discountPrice;
 
@@ -40,27 +41,27 @@ public class Proposal {
         this.offerPrice = offerPrice;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
-    public Date getExpireDate() {
+    public LocalDate getExpireDate() {
         return expireDate;
     }
 
-    public void setExpireDate(Date expireDate) {
+    public void setExpireDate(LocalDate expireDate) {
         this.expireDate = expireDate;
     }
 
@@ -78,5 +79,19 @@ public class Proposal {
 
     public void setDiscountPrice(BigDecimal discountPrice) {
         this.discountPrice = discountPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "Proposal{" +
+                "company=" + company +
+                ", vehicle=" + vehicle +
+                ", offerPrice=" + offerPrice +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", expireDate=" + expireDate +
+                ", isApproved=" + isApproved +
+                ", discountPrice=" + discountPrice +
+                '}';
     }
 }

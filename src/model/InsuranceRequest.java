@@ -7,6 +7,7 @@ public class InsuranceRequest {
     private Vehicle vehicle;
     private Policy policy;
 
+
     public InsuranceRequest(Vehicle vehicle, Policy policy) {
         this.vehicle = vehicle;
         this.policy = policy;
@@ -37,5 +38,14 @@ public class InsuranceRequest {
 
     public void setPolicy(Policy policy) {
         this.policy = policy;
+    }
+
+    @Override
+    public String toString() {
+        return "InsuranceRequest{" +
+                "proposalList=" + proposalList +
+                ", vehicle=" + vehicle +
+                ", policy=" + policy +
+                '}';
     }
 }

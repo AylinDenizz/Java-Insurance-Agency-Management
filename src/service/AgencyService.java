@@ -22,7 +22,7 @@ public class AgencyService {
         }
     }
 
-    public void addInsuranceCompanyToAgancy(Agency agency, InsuranceCompany insuranceCompany){
+    public void addInsuranceCompanyToAgency(Agency agency, InsuranceCompany insuranceCompany){
         if(agency.getInsuranceCompanyList() != null) {
             agency.getInsuranceCompanyList().add(insuranceCompany);
 
@@ -32,6 +32,7 @@ public class AgencyService {
             agency.setInsuranceCompanyList(insuranceCompanyList);
         }
     }
+
     public void addPaymentMovementToAgency(Agency agency, PaymentMovement paymentMovement){
         if(agency.getPaymentMovementList()!=null) {
             agency.getPaymentMovementList().add(paymentMovement);

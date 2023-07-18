@@ -4,11 +4,10 @@ import model.*;
 
 import java.util.ArrayList;
 
-public class insuranceRequestService {
+public class InsuranceRequestService {
 
-    public InsuranceRequest createInsuranceRequest(Vehicle vehicle,Policy policy) {
+    public InsuranceRequest createInsuranceRequest(Vehicle vehicle) {
         InsuranceRequest insuranceRequest = new InsuranceRequest();
-        insuranceRequest.setPolicy(policy);
         insuranceRequest.setVehicle(vehicle);
         return insuranceRequest;
     }
@@ -21,6 +20,11 @@ public class insuranceRequestService {
             ProposalList.add(proposal);
             insuranceRequest.setProposalList(ProposalList);
         }
+    }
+
+    public void addPolicyListToInsuranceRequest(InsuranceRequest insuranceRequest, Policy policy) {
+            insuranceRequest.setPolicy(policy);
+
     }
 
 }

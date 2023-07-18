@@ -2,13 +2,19 @@ package service;
 
 import model.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerService {
+
+    ProposalService proposalService = new ProposalService();
+
     public Customer createCustomer(String name, CustomerTypeEnum customerTypeEnum) {
         Customer customer = new Customer();
         customer.setName(name);
         customer.setCustomerTypeEnum(customerTypeEnum);
+
 
         return customer;
     }
@@ -51,6 +57,40 @@ public class CustomerService {
             vehicleList.add(vehicle);
             customer.setVehicleList(vehicleList);
         }
+    }
+
+    public void acceptProposal(Customer customer, Proposal proposal, InsuranceRequest insuranceRequest) {
+        List<InsuranceRequest> insuranceRequestList = customer.getInsuranceRequestList();
+        for (InsuranceRequest insuranceRequests : insuranceRequestList) {
+            if (insuranceRequests.equals(insuranceRequest)) {
+                for (Proposal proposal1 : insuranceRequests.getProposalList()) {
+                    if (proposal1.equals(proposal)) {
+                        BankAccount customerBankAccount = checkBankAccount(customer,
+                                proposalService.calculateDiscountedPrice(proposal));
+                        if (customerBankAccount != null) {
+                            customerBankAccount.setAmount(customerBankAccount.getAmount().subtract(
+                                    proposalService.calculateDiscountedPrice(proposal)));
+                            proposal.setApproved(true);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    public BankAccount checkBankAccount(Customer customer, BigDecimal amount) {
+        List<BankAccount> bankAccountList = customer.getBankAccountList();
+        for (BankAccount bankAccount : bankAccountList) {
+
+            if (bankAccount.getAmount().compareTo(amount) >= 0) {
+                return bankAccount;
+            }
+            else {
+                return null;
+            }
+        }
+        return null;
     }
 
 

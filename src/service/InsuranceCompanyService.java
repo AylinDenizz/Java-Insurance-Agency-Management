@@ -40,7 +40,7 @@ public class InsuranceCompanyService {
         }
     }
 
-    public void addBankAccountToInsuranceCompany(InsuranceCompany insuranceCompany, PaymentMovement paymentMovement){
+    public void addPaymentMovementToInsuranceCompany(InsuranceCompany insuranceCompany, PaymentMovement paymentMovement){
         if(insuranceCompany.getPaymentMovementList() != null) {
             insuranceCompany.getPaymentMovementList().add(paymentMovement);
 
