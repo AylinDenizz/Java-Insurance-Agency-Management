@@ -119,7 +119,7 @@ public class Main {
         // Commision income agency movement performed
         agencyBankAccount.setAmount(agencyBankAccount.getAmount().add(commissionAmount));
         PaymentMovement commisionIncomeCompanyToAgency = paymentMovementService.createPaymentMovementService(
-                    agency, "commision Income",MovementTypeEnum.INCOME,commissionAmount);
+                    agencyBankAccount, "commision Income",MovementTypeEnum.INCOME,commissionAmount);
             agencyService.addPaymentMovementToAgency(agency,commisionIncomeCompanyToAgency);
 
         }

@@ -64,8 +64,8 @@ public class CustomerService {
         for (InsuranceRequest insuranceRequests : insuranceRequestList) {
             if (insuranceRequests.equals(insuranceRequest)) {
                 for (Proposal proposal1 : insuranceRequests.getProposalList()) {
-                    if (proposal1.equals(proposal)) {
-                        BankAccount customerBankAccount = checkBankAccount(customer,
+                    if (proposal1.equals(proposal) && checkBankAccount(customer,proposalService.calculateDiscountedPrice(proposal1))) {
+                        BankAccount customerBankAccount = returnAppropriateBankAccount(customer,
                                 proposalService.calculateDiscountedPrice(proposal));
                         if (customerBankAccount != null) {
                             customerBankAccount.setAmount(customerBankAccount.getAmount().subtract(
@@ -81,19 +81,36 @@ public class CustomerService {
     }
 
 
-    public BankAccount checkBankAccount(Customer customer, BigDecimal amount) {
+    public boolean checkBankAccount(Customer customer, BigDecimal amount) {
+        boolean returnItem = false;
         List<BankAccount> bankAccountList = customer.getBankAccountList();
         for (BankAccount bankAccount : bankAccountList) {
 
             if (bankAccount.getAmount().compareTo(amount) >= 0) {
-                return bankAccount;
+                 returnItem = true;
+                break;
             }
             else {
-                return null;
+                 returnItem = true;
             }
         }
-        return null;
+        return returnItem;
     }
+
+    public BankAccount returnAppropriateBankAccount(Customer customer, BigDecimal amount) {
+        BankAccount appropriateBankAccount = new BankAccount();
+
+        List<BankAccount> bankAccountList = customer.getBankAccountList();
+        for (BankAccount bankAccount : bankAccountList) {
+
+            if (bankAccount.getAmount().compareTo(amount) >= 0) {
+                appropriateBankAccount = bankAccount;
+            }
+        }
+        return appropriateBankAccount;
+    }
+
+
 
 
 }
