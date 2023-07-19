@@ -22,6 +22,7 @@ public class Main {
         InsuranceService insuranceService = new InsuranceService();
         PaymentMovementService paymentMovementService = new PaymentMovementService();
         PolicyService policyService = new PolicyService();
+        AccidentalService accidentalService = new AccidentalService();
 
         //Bank Accounts are created.
         BankAccount agencyBankAccount = bankAccountService.createBankAccount("Ziraat", "TR55003333225693441",
@@ -52,6 +53,12 @@ public class Main {
         customerService.addBankAccountToCustomer(customer1, CustomerBankAccount1);
         customerService.addVehicleToCustomer(customer1, vehicle1);
 
+        //accident object created.
+        LocalDate accidentDate = LocalDate.now();
+        Accident accident1 = accidentalService.createAccident(accidentDate,"traffic accident happend",new BigDecimal(88000),6 );
+        vehicleService.addAccidentToVehicle(vehicle1,accident1);
+        System.out.println(accident1.toString());
+
         //creating agency object is created and setted its proporties.
         Agency agency = agencyService.createAgency("man");
         agencyService.addBankAccountToAgency(agency, agencyBankAccount);
@@ -64,6 +71,7 @@ public class Main {
         InsuranceRequest insuranceRequest = insuranceRequestService.createInsuranceRequest(vehicle1);
         customerService.addInsuranceRequestToCustomer(customer1, insuranceRequest);
 
+
         //Proposal object is created.
         LocalDate startDate = LocalDate.of(2023, Month.AUGUST, 31);
         LocalDate endDate = LocalDate.of(2024, Month.AUGUST, 31);
@@ -72,13 +80,14 @@ public class Main {
         ProposalService proposalService = new ProposalService();
         Proposal proposal1 = proposalService.createProposal(insuranceCompany, vehicle1, new BigDecimal(1000), startDate, endDate, expireDate, new BigDecimal(100));
 
-        //  Proposal added to insurance request and added to customer object.
         insuranceRequestService.addProposalListToInsuranceRequest(insuranceRequest, proposal1);
-        customerService.addInsuranceRequestToCustomer(customer1, insuranceRequest);
+        //  Proposal added to insurance request and added to customer object.
 
         // discounted price calculated and proposal accepted.
         BigDecimal discountedPrice = proposalService.calculateDiscountedPrice(proposal1);
         customerService.acceptProposal(customer1, proposal1, insuranceRequest);
+
+
 
         // payment movement from customer to agency performed.
         if (proposal1.getApproved()) {
