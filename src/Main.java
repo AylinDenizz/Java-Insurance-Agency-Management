@@ -21,6 +21,7 @@ public class Main {
         CustomerService customerService = new CustomerService();
         InsuranceService insuranceService = new InsuranceService();
         PaymentMovementService paymentMovementService = new PaymentMovementService();
+        PolicyService policyService = new PolicyService();
 
         //Bank Accounts are created.
         BankAccount agencyBankAccount = bankAccountService.createBankAccount("Ziraat", "TR55003333225693441",
@@ -121,6 +122,11 @@ public class Main {
             agencyService.addPaymentMovementToAgency(agency,commisionIncomeCompanyToAgency);
 
         }
+
+        Policy policy = policyService.createPolicy(proposal1.getCompany(), proposal1.getVehicle(), discountedPrice,
+                proposal1.getStartDate(), proposal1.getEndDate());
+        customerService.addPolicyToCustomer(customer1, policy);
+        insuranceRequestService.addPolicyListToInsuranceRequest(insuranceRequest,policy);
         System.out.println(customer1);
         System.out.println(agency);
         System.out.println(insuranceCompany);

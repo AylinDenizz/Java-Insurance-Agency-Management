@@ -59,6 +59,16 @@ public class CustomerService {
         }
     }
 
+    public void addPolicyToCustomer(Customer customer, Policy policy) {
+        if (customer.getPolicyList() != null) {
+            customer.getPolicyList().add(policy);
+        } else {
+            ArrayList<Policy> policyList = new ArrayList<>();
+            policyList.add(policy);
+            customer.setPolicyList(policyList);
+        }
+    }
+
     public void acceptProposal(Customer customer, Proposal proposal, InsuranceRequest insuranceRequest) {
         List<InsuranceRequest> insuranceRequestList = customer.getInsuranceRequestList();
         for (InsuranceRequest insuranceRequest1: insuranceRequestList) {
